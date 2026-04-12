@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
@@ -8,8 +8,6 @@
     <title>ANDS - Associação Nacional de Desenvolvimento Sustentável</title>
     <meta name="description" content="Transformando vidas e criando oportunidades por meio do esporte e desenvolvimento sustentável.">
     
-    <!-- Tailwind CSS + Fonts -->
-
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -46,93 +44,39 @@
                         'pulse-slow': 'pulse 3s infinite',
                     },
                     keyframes: {
-                        fadeIn: {
-                            '0%': { opacity: '0' },
-                            '100%': { opacity: '1' },
-                        },
-                        slideUp: {
-                            '0%': { transform: 'translateY(30px)', opacity: '0' },
-                            '100%': { transform: 'translateY(0)', opacity: '1' },
-                        },
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-20px)' },
-                        },
+                        fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+                        slideUp: { '0%': { transform: 'translateY(30px)', opacity: '0' }, '100%': { transform: 'translateY(0)', opacity: '1' } },
+                        float: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-20px)' } },
                     },
-                    fontSize: {
-                        'xxs': '0.65rem',
-                    }
+                    fontSize: { 'xxs': '0.65rem' }
                 }
             }
         }
     </script>
     
-    <!-- Alpine.js for interactivity -->
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     
-    <!-- Swiper for carousel -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     
-    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     
-    <!-- AOS for animations -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     
 <style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-    
-    body {
-        font-family: 'Inter', sans-serif;
-        background-color: #F9FAFB;
-        color: #1F2937;
-    }
-    
-    /* APENAS ESTA PARTE É NECESSÁRIA PARA ROLAGEM LATERAL */
-    html, body {
-        overflow-x: hidden;
-        width: 100%;
-        max-width: 100%;
-        position: relative;
-    }
-    
-    /* Mantém overflow-x apenas no nível raiz, não nos elementos internos */
-    main, section, div:not(.absolute):not(.fixed) {
-        overflow-x: visible !important;
-    }
-    
-    /* Apenas para imagens muito grandes */
-    img {
-        max-width: 100%;
-        height: auto;
-    }
-    
-    /* CORREÇÃO ESPECÍFICA APENAS PARA O MENU MOBILE */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background-color: #F9FAFB; color: #1F2937; }
+    html, body { overflow-x: hidden; width: 100%; max-width: 100%; position: relative; }
+    main, section, div:not(.absolute):not(.fixed) { overflow-x: visible !important; }
+    img { max-width: 100%; height: auto; }
     @media (max-width: 768px) {
-        /* Apenas previne rolagem quando menu está aberto */
-        body.menu-open {
-            overflow: hidden;
-        }
-        
-        /* Menu mobile - versão segura sem alterar layout */
-        .md\\:hidden[x-cloak] {
-            width: calc(100% - 2rem) !important;
-            margin-left: auto !important;
-            margin-right: auto !important;
-            left: 0 !important;
-            right: 0 !important;
-        }
+        body.menu-open { overflow: hidden; }
+        .md\\:hidden[x-cloak] { width: calc(100% - 2rem) !important; margin-left: auto !important; margin-right: auto !important; left: 0 !important; right: 0 !important; }
     }
 </style>
 </head>
@@ -142,76 +86,33 @@
         activeSection: 'home',
         scrollPosition: 0,
         init() {
-            // Initialize AOS
-            AOS.init({
-                duration: 800,
-                once: true,
-                offset: 100
-            });
-            
-            // Update active section on scroll
+            AOS.init({ duration: 800, once: true, offset: 100 });
             window.addEventListener('scroll', () => {
                 this.scrollPosition = window.scrollY;
-                
                 const sections = ['home', 'about', 'projects', 'impact', 'news', 'contact'];
                 for (let section of sections) {
                     const el = document.getElementById(section);
                     if (el) {
                         const rect = el.getBoundingClientRect();
-                        if (rect.top <= 100 && rect.bottom >= 100) {
-                            this.activeSection = section;
-                        }
+                        if (rect.top <= 100 && rect.bottom >= 100) { this.activeSection = section; }
                     }
                 }
             });
-            
-            // Initialize Swiper
-            const swiper = new Swiper('.swiper', {
-                loop: true,
-                autoplay: {
-                    delay: 5000,
-                    disableOnInteraction: false,
-                },
-                pagination: {
-                    el: '.swiper-pagination',
-                    clickable: true,
-                    dynamicBullets: true,
-                },
-                navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev',
-                },
-                effect: 'fade',
-                fadeEffect: {
-                    crossFade: true
-                },
-                slidesPerView: 1,
-                spaceBetween: 0,
+            new Swiper('.swiper', {
+                loop: true, autoplay: { delay: 5000, disableOnInteraction: false },
+                pagination: { el: '.swiper-pagination', clickable: true, dynamicBullets: true },
+                navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+                effect: 'fade', fadeEffect: { crossFade: true }, slidesPerView: 1, spaceBetween: 0
             });
-            
-            // Initialize Lucide icons
             lucide.createIcons();
-            
-            // Form submission
-            const contactForm = document.getElementById('contactForm');
-            if (contactForm) {
-                contactForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    // Here you would normally send the form data to a server
-                    alert('Obrigado pelo seu contato! Em breve retornaremos.');
-                    this.reset();
-                });
-            }
         }
     }" 
     @scroll.window="scrollPosition = window.scrollY"
     class="relative">
     
-    <!-- Navigation -->
     <nav :class="scrollPosition > 100 ? 'glass-effect bg-white/90 py-4 shadow-lg' : 'bg-transparent py-4 md:py-6'"
          class="fixed top-0 left-0 w-full z-50 transition-all duration-500 px-4 xs:px-6 sm:px-8">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <!-- Logo -->
             <div class="flex items-center space-x-2">
                 <div class="w-10 h-10 md:w-12 md:h-12 bg-primary rounded-full flex items-center justify-center">
                     <i data-lucide="heart-handshake" class="w-6 h-6 text-white"></i>
@@ -222,51 +123,42 @@
                 </div>
             </div>
             
-            <!-- Desktop Menu -->
             <div class="hidden md:flex items-center space-x-6 lg:space-x-10">
                 <a href="#home" :class="activeSection === 'home' ? 'text-primary font-semibold' : 'text-dark hover:text-primary'" class="transition-colors duration-300 text-sm lg:text-base">Home</a>
                 <a href="#about" :class="activeSection === 'about' ? 'text-primary font-semibold' : 'text-dark hover:text-primary'" class="transition-colors duration-300 text-sm lg:text-base">Sobre Nós</a>
                 <a href="#projects" :class="activeSection === 'projects' ? 'text-primary font-semibold' : 'text-dark hover:text-primary'" class="transition-colors duration-300 text-sm lg:text-base">Projetos</a>
                 <a href="#impact" :class="activeSection === 'impact' ? 'text-primary font-semibold' : 'text-dark hover:text-primary'" class="transition-colors duration-300 text-sm lg:text-base">Impacto</a>
-                <!--<a href="#news" :class="activeSection === 'news' ? 'text-primary font-semibold' : 'text-dark hover:text-primary'" class="transition-colors duration-300 text-sm lg:text-base">Notícias</a>-->
                 <a href="#contact" :class="activeSection === 'contact' ? 'text-primary font-semibold' : 'text-dark hover:text-primary'" class="transition-colors duration-300 text-sm lg:text-base">Contato</a>
-                <a href="#contact" class="btn-primary">
-                    Doe Agora
-                </a>
+                <a href="#contact" class="btn-primary">Doe Agora</a>
             </div>
             
-            <!-- Mobile Menu Button -->
-<button @click="isMenuOpen = !isMenuOpen; document.body.classList.toggle('menu-open', isMenuOpen)" 
-        class="md:hidden text-dark" aria-label="Menu">
-    <i data-lucide="menu" x-show="!isMenuOpen" class="w-6 h-6"></i>
-    <i data-lucide="x" x-show="isMenuOpen" x-cloak class="w-6 h-6"></i>
-</button>
-          <!-- Mobile Menu - MANTENDO LAYOUT ORIGINAL -->
-<div x-show="isMenuOpen" x-cloak 
-     x-transition:enter="transition ease-out duration-300"
-     x-transition:enter-start="opacity-0 -translate-y-2"
-     x-transition:enter-end="opacity-100 translate-y-0"
-     class="md:hidden mt-4 pb-4 bg-white shadow-lg rounded-lg"
-     style="z-index: 60; width: calc(100% - 2rem); margin: 1rem auto;">
-    <div class="flex flex-col space-y-0">
-        <a href="#home" @click="isMenuOpen = false" class="text-dark hover:text-primary transition-colors py-3 px-4 text-base hover:bg-gray-50">Home</a>
-        <a href="#about" @click="isMenuOpen = false" class="text-dark hover:text-primary transition-colors py-3 px-4 text-base hover:bg-gray-50">Sobre Nós</a>
-        <a href="#projects" @click="isMenuOpen = false" class="text-dark hover:text-primary transition-colors py-3 px-4 text-base hover:bg-gray-50">Projetos</a>
-        <a href="#impact" @click="isMenuOpen = false" class="text-dark hover:text-primary transition-colors py-3 px-4 text-base hover:bg-gray-50">Impacto</a>
-        <a href="#news" @click="isMenuOpen = false" class="text-dark hover:text-primary transition-colors py-3 px-4 text-base hover:bg-gray-50">Notícias</a>
-        <a href="#contact" @click="isMenuOpen = false" class="text-dark hover:text-primary transition-colors py-3 px-4 text-base hover:bg-gray-50">Contato</a>
-        <a href="#contact" @click="isMenuOpen = false" class="btn-primary text-center py-3 mx-4 my-3">
-            Doe Agora
-        </a>
-    </div>
-</div>
+            <button @click="isMenuOpen = !isMenuOpen; document.body.classList.toggle('menu-open', isMenuOpen)" 
+                    class="md:hidden text-dark" aria-label="Menu">
+                <i data-lucide="menu" x-show="!isMenuOpen" class="w-6 h-6"></i>
+                <i data-lucide="x" x-show="isMenuOpen" x-cloak class="w-6 h-6"></i>
+            </button>
+            
+            <div x-show="isMenuOpen" x-cloak 
+                 x-transition:enter="transition ease-out duration-300"
+                 x-transition:enter-start="opacity-0 -translate-y-2"
+                 x-transition:enter-end="opacity-100 translate-y-0"
+                 class="md:hidden mt-4 pb-4 bg-white shadow-lg rounded-lg"
+                 style="z-index: 60; width: calc(100% - 2rem); margin: 1rem auto;">
+                <div class="flex flex-col space-y-0">
+                    <a href="#home" @click="isMenuOpen = false" class="text-dark hover:text-primary transition-colors py-3 px-4 text-base hover:bg-gray-50">Home</a>
+                    <a href="#about" @click="isMenuOpen = false" class="text-dark hover:text-primary transition-colors py-3 px-4 text-base hover:bg-gray-50">Sobre Nós</a>
+                    <a href="#projects" @click="isMenuOpen = false" class="text-dark hover:text-primary transition-colors py-3 px-4 text-base hover:bg-gray-50">Projetos</a>
+                    <a href="#impact" @click="isMenuOpen = false" class="text-dark hover:text-primary transition-colors py-3 px-4 text-base hover:bg-gray-50">Impacto</a>
+                    <a href="#contact" @click="isMenuOpen = false" class="text-dark hover:text-primary transition-colors py-3 px-4 text-base hover:bg-gray-50">Contato</a>
+                    <a href="#contact" @click="isMenuOpen = false" class="btn-primary text-center py-3 mx-4 my-3">Doe Agora</a>
+                </div>
+            </div>
+        </div>
     </nav>
     
-    <!-- Hero Section -->
     <section id="home" class="hero-gradient text-white pt-20 md:pt-24">
         <div class="max-w-7xl mx-auto px-4 xs:px-6 sm:px-8 py-12 md:py-20 lg:py-28">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
-                <!-- Left Content -->
                 <div class="animate-slide-up" data-aos="fade-right">
                     <div class="mb-4 md:mb-6">
                         <span class="inline-block impact-badge mb-3">Transformando vidas através do esporte</span>
@@ -275,12 +167,10 @@
                             <span class="text-secondary">Desenvolvimento Sustentável</span>
                         </h1>
                     </div>
-                    
                     <p class="text-lg md:text-xl text-gray-100 mb-6 md:mb-10 leading-relaxed max-w-xl">
                         Promovemos inclusão social, saúde e educação através de projetos esportivos 
                         que transformam vidas e criam oportunidades para crianças, jovens, adultos e idosos.
                     </p>
-                    
                     <div class="flex flex-col xs:flex-row gap-3 md:gap-4">
                         <a href="#projects" class="btn-secondary text-center">
                             <i data-lucide="activity" class="w-5 h-5 inline mr-2"></i>
@@ -292,10 +182,8 @@
                     </div>
                 </div>
                 
-                <!-- Right - Featured Image -->
                 <div class="relative animate-float mt-8 md:mt-0" data-aos="fade-left">
                     <div class="relative overflow-hidden rounded-2xl shadow-2xl sport-card">
-                        <!-- Imagem do projeto principal -->
                         <img src="img/apresentacao.jpeg" 
                              alt="Jovens praticando esportes" 
                              class="w-full h-[300px] xs:h-[350px] sm:h-[400px] md:h-[450px] lg:h-[500px] object-cover"
@@ -305,8 +193,6 @@
                             <p class="text-gray-200 text-sm md:text-base">- Nelson Mandela</p>
                         </div>
                     </div>
-                    
-                    <!-- Floating stats -->
                     <div class="hidden md:block absolute -bottom-5 -left-5 bg-white p-4 rounded-2xl shadow-xl sport-card">
                         <p class="font-bold text-primary text-lg">+18000</p>
                         <p class="text-xs text-gray-600">Vidas Impactadas</p>
@@ -320,7 +206,6 @@
         </div>
     </section>
     
-    <!-- About Section -->
     <section id="about" class="py-12 md:py-20 bg-light">
         <div class="max-w-7xl mx-auto section-padding">
             <div class="text-center mb-10 md:mb-16" data-aos="fade-up">
@@ -333,7 +218,6 @@
             </div>
             
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
-                <!-- Missão -->
                 <div class="bg-white rounded-xl md:rounded-2xl p-6 md:p-8 sport-card" data-aos="fade-right">
                     <div class="w-14 h-14 bg-primary rounded-full flex items-center justify-center mb-6">
                         <i data-lucide="target" class="w-8 h-8 text-white"></i>
@@ -351,48 +235,37 @@
                     </div>
                 </div>
                 
-                
-                <!-- Histórico -->
                 <div class="bg-white rounded-xl md:rounded-2xl p-6 md:p-8 sport-card" data-aos="fade-left">
                     <div class="w-14 h-14 bg-secondary rounded-full flex items-center justify-center mb-6">
                         <i data-lucide="history" class="w-8 h-8 text-white"></i>
                     </div>
                     <h3 class="font-poppins text-2xl md:text-3xl text-dark mb-6">Histórico</h3>
-                    
                     <div class="space-y-6">
                         <div class="timeline-item">
                             <h4 class="font-semibold text-dark">Educação</h4>
                             <p class="text-gray-600 text-sm mt-1">
                                 A ANDS tem contribuído ativamente para o fortalecimento da educação e da cidadania, 
-                                oferecendo cursos voltados à Segurança Pública e Políticas Públicas em diversos municípios e câmaras municipais.
-                                Em dezembro de 2025, a organização iniciou um projeto educacional em parceria com a EDUCAFRO e o Ministério da Educação 
-                                (CPOP - Rede Nacional de Cursinhos Populares para o ENEM), atendendo jovens das comunidades do Grajaú, Piolho (Espraiada – 
-                                Jornalista Roberto Marinho) e Brasilândia (Jardim Damasceno), todas localizadas na cidade de São Paulo.
+                                oferecendo cursos voltados à Segurança Pública e Políticas Públicas em diversos municípios.
                             </p>
                         </div>
-                        
                         <div class="timeline-item">
                             <h4 class="font-semibold text-dark">Segurança Alimentar</h4>
-                            <p class="text-gray-600 text-sm mt-1">Com foco na dignidade e no combate à fome, a ANDS mantém programas contínuos de distribuição de alimentos
-                           e cestas básicas na periferia da Zona Sul de São Paulo, em parceria com a Igreja do Evangelho Quadrangular do Capão Redondo. 
+                            <p class="text-gray-600 text-sm mt-1">
+                                Com foco na dignidade e no combate à fome, a ANDS mantém programas contínuos de distribuição de alimentos
+                                em parceria com instituições locais.
                             </p>
                         </div>
-                        
                         <div class="timeline-item">
                             <h4 class="font-semibold text-dark">No Esporte</h4>
-                            <p class="text-gray-600 text-sm mt-1">No campo esportivo, a associação tem se destacado com projetos aprovados em âmbito federal, 
-                            por meio de incentivos fiscais, contemplando modalidades como Beach Tennis e Pickleball. Em 2023, no edital do CONDECA, foram aprovadas as iniciativas de Squash, Beach Tennis e Vela (Ilhabela).
-                            Em parceria com a Federação Paulista de Squash, a atleta Lukene Mirela Rufino, participante dos projetos da ANDS, conquistou o 1º lugar no Campeonato Squash Wall Open (2025)
-                            e o 2º lugar no CAY Open (2025), além de ter sido eleita Melhor Atleta Sub-15 e Sub-17 nos anos de 2023 e 2024. Em dezembro de 2024, a organização realizou o CHAMPS OPEN de Beach Tennis,
-                            na Arena Ibirapuera (São Paulo) — evento gratuito que reuniu 204 atletas amadores, 22 profissionais e um público de 2.600 pessoas ao longo de três dias.
-                            A competição teve transmissão oficial pelo canal Playst (YouTube), com mais de 113 mil inscritos, e consagrou como campeões Vitória Marchezini e Sophia Chow (Pro Feminino) e André Baran e João Wiesinger (Pro Masculino).
+                            <p class="text-gray-600 text-sm mt-1">
+                                No campo esportivo, a associação tem se destacado com projetos aprovados em âmbito federal, 
+                                contemplando modalidades como Beach Tennis, Pickleball e Squash, promovendo inclusão e alto rendimento.
                             </p>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <!-- Valores -->
             <div class="mt-12 md:mt-16" data-aos="fade-up">
                 <h3 class="font-poppins text-2xl md:text-3xl text-dark mb-8 text-center">Nossos Valores</h3>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
@@ -403,7 +276,6 @@
                         <h4 class="font-semibold text-dark mb-2">Inclusão Social</h4>
                         <p class="text-gray-600 text-sm">Promovemos acesso igualitário ao esporte para todos</p>
                     </div>
-                    
                     <div class="bg-white rounded-xl p-6 text-center sport-card">
                         <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-4 mx-auto">
                             <i data-lucide="heart" class="w-6 h-6 text-sport-green"></i>
@@ -411,7 +283,6 @@
                         <h4 class="font-semibold text-dark mb-2">Saúde e Bem-estar</h4>
                         <p class="text-gray-600 text-sm">Estimulamos hábitos saudáveis em todas as idades</p>
                     </div>
-                    
                     <div class="bg-white rounded-xl p-6 text-center sport-card">
                         <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mb-4 mx-auto">
                             <i data-lucide="book-open" class="w-6 h-6 text-sport-orange"></i>
@@ -419,7 +290,6 @@
                         <h4 class="font-semibold text-dark mb-2">Educação</h4>
                         <p class="text-gray-600 text-sm">Integramos esporte e aprendizado para formação integral</p>
                     </div>
-                    
                     <div class="bg-white rounded-xl p-6 text-center sport-card">
                         <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4 mx-auto">
                             <i data-lucide="globe" class="w-6 h-6 text-social-purple"></i>
@@ -432,171 +302,75 @@
         </div>
     </section>
     
-    <!-- Projects Section -->
     <section id="projects" class="py-12 md:py-20 bg-white">
         <div class="max-w-7xl mx-auto section-padding">
             <div class="text-center mb-10 md:mb-16" data-aos="fade-up">
                 <span class="text-primary font-roboto tracking-widest text-xs md:text-sm uppercase">Nossas Iniciativas</span>
                 <h2 class="font-poppins text-3xl md:text-4xl lg:text-5xl text-dark mt-2 mb-3 md:mb-4">Projetos Esportivos</h2>
                 <p class="text-gray-600 max-w-3xl mx-auto text-sm md:text-base">
-                    Conheça nossos projetos que transformam vidas através do esporte, promovendo inclusão, 
-                    saúde e qualidade de vida para diferentes públicos.
+                    Conheça nossos projetos que transformam vidas através do esporte.
                 </p>
             </div>
             
-                <!-- Projects Grid -->
-<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
-    
-    <!-- Squash Brasil -->
-    <div class="sport-card group rounded-xl md:rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300" data-aos="fade-up" data-aos-delay="100">
-        
-        <!-- Container da imagem - OTIMIZADO -->
-        <div class="sport-card group rounded-2xl md:rounded-3xl  neon-card">
-                    <div class="relative h-61 w-full ">
-                    <img src="img/squashimg.png" 
-                     alt="Jogador de squash" 
-                     class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-300"
-                     loading="lazy"
-                     style="image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges;">
-            </div>
-            <!-- Tag do projeto -->
-            <div class="absolute top-4 left-4 z-10">
-                <span class="bg-white/95 px-4 py-2 rounded-lg font-semibold text-gray-800 shadow-lg backdrop-blur-sm">Squash Brasil</span>
-            </div>
-        </div>
-        
-        <!-- Conteúdo do card -->
-        <div class="p-6">
-            <h3 class="font-poppins text-xl md:text-2xl text-dark mb-3">Squash Brasil</h3>
-            <p class="text-gray-600 mb-4">
-                Projeto de inclusão social para jovens através do squash, com programas 
-                educacionais e campeonatos para todas as idades.
-            </p>
-            
-            <div class="space-y-3 mb-6">
-                <div class="flex items-center text-sm">
-                    <i data-lucide="target" class="w-4 h-4 text-sport-blue mr-2"></i>
-                    <span class="text-gray-700">Missão: Transformar vidas através do esporte</span>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
+                <div class="sport-card group rounded-xl md:rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300" data-aos="fade-up" data-aos-delay="100">
+                    <div class="relative h-48 w-full overflow-hidden">
+                        <img src="img/placeholder.jpg" 
+                             alt="Projeto Squash" 
+                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                             loading="lazy">
+                        <div class="absolute top-4 left-4 z-10">
+                            <span class="bg-white/95 px-4 py-2 rounded-lg font-semibold text-gray-800 shadow-lg backdrop-blur-sm">Squash Brasil</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-poppins text-xl md:text-2xl text-dark mb-3">Squash Brasil</h3>
+                        <p class="text-gray-600 mb-4">Projeto de inclusão social para jovens através do squash.</p>
+                        <a href="#contact" class="inline-flex items-center text-sport-blue font-semibold hover:text-primary transition-colors">
+                            Saiba mais <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
+                        </a>
+                    </div>
                 </div>
-                <div class="flex items-center text-sm">
-                    <i data-lucide="users" class="w-4 h-4 text-sport-blue mr-2"></i>
-                    <span class="text-gray-700">Público: Crianças, adolescentes e adultos</span>
+                
+                <div class="sport-card group rounded-xl md:rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300" data-aos="fade-up" data-aos-delay="200">
+                    <div class="relative h-48 w-full overflow-hidden">
+                        <img src="img/placeholder.jpg" 
+                             alt="Projeto Beach Tennis" 
+                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                             loading="lazy">
+                        <div class="absolute top-4 left-4 z-10">
+                            <span class="bg-white/95 px-4 py-2 rounded-lg font-semibold text-gray-800 shadow-lg backdrop-blur-sm">Beach Tennis</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-poppins text-xl md:text-2xl text-dark mb-3">Beach Tennis</h3>
+                        <p class="text-gray-600 mb-4">Promove inclusão social e desenvolvimento esportivo.</p>
+                        <a href="#contact" class="inline-flex items-center text-sport-green font-semibold hover:text-secondary transition-colors">
+                            Saiba mais <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
+                        </a>
+                    </div>
                 </div>
-                <div class="flex items-center text-sm">
-                    <i data-lucide="map-pin" class="w-4 h-4 text-sport-blue mr-2"></i>
-                    <span class="text-gray-700">Áreas: Esporte, Inclusão Social, Educação</span>
-                </div>
-            </div>
-            
-            <a href="#contact" class="inline-flex items-center text-sport-blue font-semibold hover:text-primary transition-colors">
-                Saiba mais
-                <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
-            </a>
-        </div>
-    </div>
-    
-    <!-- Beach Tennis -->
-    <div class="sport-card group rounded-xl md:rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300" data-aos="fade-up" data-aos-delay="200">
-        
-        <!-- Container da imagem - OTIMIZADO -->
-        <div class="sport-card group rounded-2xl md:rounded-3xl  neon-card">
-                    <div class="relative h-61 w-full">
-                <img src="img/beachimg.jpeg" 
-                     alt="Jogadores de beach tennis" 
-                     class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-300"
-                     loading="lazy"
-                     style="image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges;">
-            </div>
-            <!-- Tag do projeto -->
-            <div class="absolute top-4 left-4 z-10">
-                <span class="bg-white/95 px-4 py-2 rounded-lg font-semibold text-gray-800 shadow-lg backdrop-blur-sm">Beach Tennis</span>
-            </div>
-        </div>
-        
-        <!-- Conteúdo do card -->
-        <div class="p-6">
-            <h3 class="font-poppins text-xl md:text-2xl text-dark mb-3">Beach Tennis</h3>
-            <p class="text-gray-600 mb-4">
-                "Das Areias do Brasil para o Mundo" - Promove inclusão social e desenvolvimento 
-                esportivo entre crianças, jovens, adultos e refugiados.
-            </p>
-            
-            <div class="space-y-3 mb-6">
-                <div class="flex items-center text-sm">
-                    <i data-lucide="target" class="w-4 h-4 text-sport-green mr-2"></i>
-                    <span class="text-gray-700">Missão: Inclusão social e desenvolvimento esportivo</span>
-                </div>
-                <div class="flex items-center text-sm">
-                    <i data-lucide="users" class="w-4 h-4 text-sport-green mr-2"></i>
-                    <span class="text-gray-700">Público: Crianças, jovens, adultos e refugiados</span>
-                </div>
-                  <div class="flex items-center text-sm">
-                    <i data-lucide="map-pin" class="w-4 h-4 text-sport-green mr-2"></i>
-                    <span class="text-gray-700">Áreas: Esporte, Inclusão Social, Educação</span>
-                </div>
-                <div class="flex items-center text-sm">
-                                  
+                
+                <div class="sport-card group rounded-xl md:rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300" data-aos="fade-up" data-aos-delay="300">
+                    <div class="relative h-48 w-full overflow-hidden">
+                        <img src="img/placeholder.jpg" 
+                             alt="Projeto Pickleball" 
+                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                             loading="lazy">
+                        <div class="absolute top-4 left-4 z-10">
+                            <span class="bg-white/95 px-4 py-2 rounded-lg font-semibold text-gray-800 shadow-lg backdrop-blur-sm">Pickleball</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-poppins text-xl md:text-2xl text-dark mb-3">Pickleball</h3>
+                        <p class="text-gray-600 mb-4">Qualidade de vida e dignidade para idosos.</p>
+                        <a href="#contact" class="inline-flex items-center text-sport-orange font-semibold hover:text-accent transition-colors">
+                            Saiba mais <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
             
-            <a href="#contact" class="inline-flex items-center text-sport-green font-semibold hover:text-secondary transition-colors">
-                Saiba mais
-                <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
-            </a>
-        </div>
-    </div>
-    
-    <!-- Pickleball -->
-    <div class="sport-card group rounded-xl md:rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300" data-aos="fade-up" data-aos-delay="300">
-        
-        <!-- Container da imagem - OTIMIZADO -->
-        <div class="relative h-48 w-full">
-            <div class="absolute inset-0 overflow-hidden">
-                <img src="img/pickleballimg.png" 
-                     alt="Idosos praticando esporte" 
-                     class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-300"
-                     loading="lazy"
-                     style="image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges;">
-            </div>
-            <!-- Tag do projeto -->
-            <div class="absolute top-4 left-4 z-10">
-                <span class="bg-white/95 px-4 py-2 rounded-lg font-semibold text-gray-800 shadow-lg backdrop-blur-sm">Pickleball</span>
-            </div>
-        </div>
-        
-        <!-- Conteúdo do card -->
-        <div class="p-6">
-            <h3 class="font-poppins text-xl md:text-2xl text-dark mb-3">Pickleball</h3>
-            <p class="text-gray-600 mb-4">
-                "Em Busca da Qualidade de Vida" - Proporciona qualidade de vida e dignidade 
-                para idosos por meio da prática esportiva inclusiva.
-            </p>
-            
-            <div class="space-y-3 mb-6">
-                <div class="flex items-center text-sm">
-                    <i data-lucide="target" class="w-4 h-4 text-sport-orange mr-2"></i>
-                    <span class="text-gray-700">Missão: Qualidade de vida e dignidade para idosos</span>
-                </div>
-                <div class="flex items-center text-sm">
-                    <i data-lucide="users" class="w-4 h-4 text-sport-orange mr-2"></i>
-                    <span class="text-gray-700">Público: Idosos, crianças e adolescentes</span>
-                </div>
-              <div class="flex items-center text-sm">
-                    <i data-lucide="map-pin" class="w-4 h-4 text-sport-orange mr-2"></i>
-                    <span class="text-gray-700">Áreas: Esporte, Inclusão Social, Educação</span>
-                </div>
-                </div>
-            </div>
-            
-            <a href="#contact" class="inline-flex items-center text-sport-orange font-semibold hover:text-accent transition-colors">
-                Saiba mais
-                <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
-            </a>
-        </div>
-    </div>
-</div>
-            
-            <!-- ANDS -->
             <div class="mt-12 md:mt-16 bg-gradient-to-r from-primary to-social-purple text-white rounded-xl md:rounded-2xl p-6 md:p-8 sport-card" data-aos="fade-up">
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8 items-center">
                     <div class="lg:col-span-2">
@@ -608,18 +382,11 @@
                         </div>
                         <p class="mb-6">
                             Atuamos em parceria com o Poder Público e a iniciativa privada no desenvolvimento 
-                            de projetos sociais e políticas públicas, com foco em sustentabilidade social e 
-                            redução das desigualdades.
+                            de projetos sociais e políticas públicas.
                         </p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="bg-white/20 px-3 py-1 rounded-full text-sm">Educação</span>
-                            <span class="bg-white/20 px-3 py-1 rounded-full text-sm">Saúde</span>
-                            <span class="bg-white/20 px-3 py-1 rounded-full text-sm">Esporte</span>
-                            <span class="bg-white/20 px-3 py-1 rounded-full text-sm">Inclusão Social</span>
-                        </div>
                     </div>
                     <div class="text-center">
-                        <a href="#contact" class="inline-block bg-white text-primary px-6 py-3 rounded-full hover:bg-gray-100 transition-all duration-300 font-semibold text-sm md:text-base">
+                        <a href="#contact" class="inline-block bg-white text-primary px-6 py-3 rounded-full hover:bg-gray-100 transition-all duration-300 font-semibold">
                             <i data-lucide="handshake" class="w-5 h-5 inline mr-2"></i>
                             Parcerias
                         </a>
@@ -629,119 +396,56 @@
         </div>
     </section>
     
-    <!-- Impact Section -->
-    <section id="impact" class="py-12 md:py-20 bg-light parallax-section" style="background-image: url('https://images.unsplash.com/photo-1545389336-cfebe9b1c9b1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80');">
+    <section id="impact" class="py-12 md:py-20 bg-light">
         <div class="max-w-7xl mx-auto section-padding">
             <div class="text-center mb-10 md:mb-16" data-aos="fade-up">
-                <span class="text-white font-roboto tracking-widest text-xs md:text-sm uppercase bg-primary/80 px-4 py-1 rounded-full">Nosso Impacto</span>
-                <h2 class="font-poppins text-3xl md:text-4xl lg:text-5xl text-white mt-4 mb-3 md:mb-4"style=" color: rgb(176, 165, 136);">Transformando Vidas</h2>
-                <p class="text-gray-200 max-w-3xl mx-auto text-sm md:text-base" style="color: rgb(61, 59, 56);">
-                    Acompanhe os resultados e números que demonstram o impacto positivo de nossos projetos na sociedade.
+                <span class="text-primary font-roboto tracking-widest text-xs md:text-sm uppercase bg-primary/10 px-4 py-1 rounded-full">Nosso Impacto</span>
+                <h2 class="font-poppins text-3xl md:text-4xl lg:text-5xl text-dark mt-4 mb-3 md:mb-4">Transformando Vidas</h2>
+                <p class="text-gray-600 max-w-3xl mx-auto text-sm md:text-base">
+                    Acompanhe os resultados e números que demonstram o impacto positivo de nossos projetos.
                 </p>
             </div>
             
-            <!-- Stats Grid -->
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-12 md:mb-16">
                 <div class="stat-card p-4 md:p-6 text-center" data-aos="fade-up" data-aos-delay="100">
                     <div class="text-3xl md:text-4xl font-bold text-primary mb-2">18000+</div>
                     <p class="text-gray-600 text-sm md:text-base">Vidas Impactadas</p>
                 </div>
-                
                 <div class="stat-card p-4 md:p-6 text-center" data-aos="fade-up" data-aos-delay="200">
                     <div class="text-3xl md:text-4xl font-bold text-secondary mb-2">5</div>
-                    <p class="text-gray-600 text-sm md:text-base">Iniciativas Ativas da ANDS</p>
+                    <p class="text-gray-600 text-sm md:text-base">Iniciativas Ativas</p>
                 </div>
-                
                 <div class="stat-card p-4 md:p-6 text-center" data-aos="fade-up" data-aos-delay="300">
                     <div class="text-3xl md:text-4xl font-bold text-accent mb-2">50+</div>
                     <p class="text-gray-600 text-sm md:text-base">Parcerias Ativas</p>
                 </div>
-                
                 <div class="stat-card p-4 md:p-6 text-center" data-aos="fade-up" data-aos-delay="400">
                     <div class="text-3xl md:text-4xl font-bold text-social-purple mb-2">3</div>
                     <p class="text-gray-600 text-sm md:text-base">Áreas de Atuação</p>
                 </div>
             </div>
-
-                    
-           
-            
-            <!-- Results -->
-            <div class="bg-white/90 backdrop-blur-sm rounded-xl md:rounded-2xl p-6 md:p-8" data-aos="fade-up">
-                <h3 class="font-poppins text-2xl md:text-3xl text-dark mb-6">Principais Realizações</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <h4 class="font-semibold text-dark mb-4 flex items-center">
-                            <i data-lucide="check-circle" class="w-5 h-5 text-secondary mr-2"></i>
-                            Squash Brasil
-                        </h4>
-                        <ul class="space-y-2">
-                            <li class="flex items-start">
-                                <i data-lucide="chevron-right" class="w-4 h-4 text-primary mr-2 mt-1"></i>
-                                <span class="text-gray-600">Implementação de programas de inclusão social para jovens</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i data-lucide="chevron-right" class="w-4 h-4 text-primary mr-2 mt-1"></i>
-                                <span class="text-gray-600">Realização de campeonatos com atletas de diversas faixas etárias</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i data-lucide="chevron-right" class="w-4 h-4 text-primary mr-2 mt-1"></i>
-                                <span class="text-gray-600">Parcerias com escolas para promover o esporte</span>
-                            </li>
-                        </ul>
-                    </div>
-                    
-                    <div>
-                        <h4 class="font-semibold text-dark mb-4 flex items-center">
-                            <i data-lucide="check-circle" class="w-5 h-5 text-secondary mr-2"></i>
-                            ANDS
-                        </h4>
-                        <ul class="space-y-2">
-                            <li class="flex items-start">
-                                <i data-lucide="chevron-right" class="w-4 h-4 text-primary mr-2 mt-1"></i>
-                                <span class="text-gray-600">Desenvolvimento de cursos para servidores públicos</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i data-lucide="chevron-right" class="w-4 h-4 text-primary mr-2 mt-1"></i>
-                                <span class="text-gray-600">Assessoria a projetos sociais e políticas públicas</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i data-lucide="chevron-right" class="w-4 h-4 text-primary mr-2 mt-1"></i>
-                                <span class="text-gray-600">Foco em sustentabilidade social e redução de desigualdades</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
     
-    
-    
-    <!-- Contact Section -->
     <section id="contact" class="py-12 md:py-20 bg-dark text-white">
         <div class="max-w-7xl mx-auto section-padding">
             <div class="text-center mb-10 md:mb-16" data-aos="fade-up">
                 <span class="text-secondary font-roboto tracking-widest text-xs md:text-sm uppercase">Entre em Contato</span>
                 <h2 class="font-poppins text-3xl md:text-4xl lg:text-5xl mt-2 mb-3 md:mb-4">Fale Conosco</h2>
                 <p class="text-gray-300 max-w-3xl mx-auto text-sm md:text-base">
-                    Quer saber mais sobre nossos projetos, fazer uma doação ou se tornar um parceiro? 
-                    Entre em contato conosco!
+                    Quer saber mais sobre nossos projetos? Entre em contato!
                 </p>
             </div>
             
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
-                <!-- Contact Info -->
                 <div data-aos="fade-right">
                     <div class="mb-8 md:mb-10">
                         <h3 class="font-poppins text-2xl md:text-3xl mb-4">Contato ANDS</h3>
                         <p class="text-gray-300 mb-6">
-                            Estamos sempre abertos a novas parcerias, voluntários e colaboradores 
-                            que queiram fazer a diferença através do esporte e desenvolvimento social.
+                            Estamos sempre abertos a novas parcerias e colaboradores.
                         </p>
                     </div>
                     
-                    <!-- Contact Details -->
                     <div class="space-y-6">
                         <div class="flex items-start space-x-4">
                             <div class="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center flex-shrink-0">
@@ -749,25 +453,9 @@
                             </div>
                             <div>
                                 <p class="text-gray-300 text-sm">E-mail</p>
-                                <p class="text-lg font-medium">esportesaudeeducacional@gmail.com</p>
+                                <p class="text-lg font-medium">contato@ands.org.br</p>
                             </div>
                         </div>
-                            <!-- Contact Details telefone -->
-                      <div class="flex items-start space-x-4">
-                        <div class="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center flex-shrink-0">
-                            <i data-lucide="phone" class="w-6 h-6 text-secondary"></i>
-                        </div>
-                        <div>
-                            <p class="text-gray-300 text-sm">Telefone/WhatsApp</p>
-                            <a href="https://wa.me/5511964552699?text=Ol%C3%A1%21+Gostaria+de+mais+informa%C3%A7%C3%B5es+sobre+os+projetos+da+ANDS." 
-                            target="_blank" 
-                            class="text-lg font-medium hover:text-secondary transition-colors duration-300 flex items-center gap-2">
-                                (11) 96455-2699
-                                <i data-lucide="external-link" class="w-4 h-4 text-gray-400"></i>
-                            </a>
-                        </div>
-                    </div>
-                        
                         <div class="flex items-start space-x-4">
                             <div class="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center flex-shrink-0">
                                 <i data-lucide="map-pin" class="w-6 h-6 text-secondary"></i>
@@ -783,163 +471,57 @@
                             </div>
                         </div>
                     </div>
-                    
-                    <!-- Social Media -->
-                    <!-- <div class="mt-10">
-                        <h4 class="font-poppins text-xl mb-4">Siga nossas redes sociais</h4>
-                        <div class="flex space-x-4">
-                            <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-primary transition-all duration-300">
-                                <i data-lucide="facebook" class="w-5 h-5"></i>
-                            </a>
-                            <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-primary transition-all duration-300">
-                                <i data-lucide="instagram" class="w-5 h-5"></i>
-                            </a>
-                            <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-primary transition-all duration-300">
-                                <i data-lucide="youtube" class="w-5 h-5"></i>
-                            </a>
-                            <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-primary transition-all duration-300">
-                                <i data-lucide="linkedin" class="w-5 h-5"></i>
-                            </a>
-                        </div>
-                    </div> -->
-
                 </div>
                 
-               <!-- Contact Form -->
-<div class="bg-white/10 glass-effect rounded-xl md:rounded-2xl p-6 md:p-8" data-aos="fade-left">
-    <h3 class="font-poppins text-2xl md:text-3xl mb-6">Envie uma mensagem</h3>
-    
-    <!-- Mensagem de Sucesso (Oculta inicialmente) -->
-    <div id="formSuccess" class="hidden bg-green-500/20 border border-green-500/30 rounded-xl p-6 mb-6 text-center">
-        <div class="flex flex-col items-center">
-            <div class="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mb-4">
-                <i data-lucide="check-circle" class="w-8 h-8 text-green-400"></i>
+                <div class="bg-white/10 glass-effect rounded-xl md:rounded-2xl p-6 md:p-8" data-aos="fade-left">
+                    <h3 class="font-poppins text-2xl md:text-3xl mb-6">Envie uma mensagem</h3>
+                    
+                    <div id="formSuccess" class="hidden bg-green-500/20 border border-green-500/30 rounded-xl p-6 mb-6 text-center">
+                        <div class="flex flex-col items-center">
+                            <div class="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mb-4">
+                                <i data-lucide="check-circle" class="w-8 h-8 text-green-400"></i>
+                            </div>
+                            <h4 class="font-poppins text-2xl text-green-300 mb-2">Mensagem Enviada!</h4>
+                            <p class="text-gray-300 text-sm mb-4">Obrigado pelo seu contato.</p>
+                        </div>
+                    </div>
+                    
+                    <form id="contactForm" action="#" method="POST" class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-gray-300 mb-2">Nome completo *</label>
+                            <input type="text" id="name" name="name"
+                                   class="w-full bg-white/5 border border-white/20 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-secondary"
+                                   required>
+                        </div>
+                        <div>
+                            <label for="email" class="block text-gray-300 mb-2">E-mail *</label>
+                            <input type="email" id="email" name="email"
+                                   class="w-full bg-white/5 border border-white/20 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-secondary"
+                                   required>
+                        </div>
+                        <div>
+                            <label for="message" class="block text-gray-300 mb-2">Mensagem</label>
+                            <textarea id="message" name="message" rows="4"
+                                      class="w-full bg-white/5 border border-white/20 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-secondary"></textarea>
+                        </div>
+                        <button type="submit" id="submitBtn" class="w-full btn-secondary">
+                            <span id="submitText">Enviar Mensagem</span>
+                        </button>
+                    </form>
+                </div>
             </div>
-            <h4 class="font-poppins text-2xl text-green-300 mb-2">Mensagem Enviada!</h4>
-            <p class="text-gray-300 text-sm mb-4">Obrigado pelo seu contato. Retornaremos em breve.</p>
-            <div class="flex items-center justify-center space-x-2">
-                <div class="w-6 h-6 border-2 border-green-400 rounded-full animate-spin"></div>
-                <p class="text-green-300 text-xs">Redirecionando em <span id="countdown">3</span>s...</p>
-            </div>
         </div>
-    </div>
-    
-    <!-- Formulário -->
-    <form id="contactForm" action="https://formspree.io/f/mlgledoy" method="POST" class="space-y-6">
-        <div>
-            <label for="name" class="block text-gray-300 mb-2">Nome completo *</label>
-            <input type="text" id="name" name="name"
-                   class="w-full bg-white/5 border border-white/20 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-secondary transition-colors duration-300"
-                   required>
-        </div>
-        
-        <div>
-            <label for="email" class="block text-gray-300 mb-2">E-mail *</label>
-            <input type="email" id="email" name="email"
-                   class="w-full bg-white/5 border border-white/20 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-secondary transition-colors duration-300"
-                   required>
-        </div>
-
-        <div>
-            <label for="phone" class="block text-gray-300 mb-2">Telefone/WhatsApp *</label>
-            <input type="tel" id="phone" name="phone"
-                   class="w-full bg-white/5 border border-white/20 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-secondary transition-colors duration-300"
-                   required>
-        </div>
-        
-        <div>
-            <label for="subject" class="block text-gray-300 mb-2">Assunto</label>
-            <select id="subject" name="subject"
-                   style="background-color: #1F2937;" class="w-full bg-white/5 border border-white/20 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-secondary transition-colors duration-300">
-                <option value="" disabled selected>Selecione um assunto</option>
-                <option value="squash">Squash Brasil</option>
-                <option value="beach-tennis">Beach Tennis</option>
-                <option value="pickleball">Pickleball</option>
-                <option value="ibrasilsocial">ANDS</option>
-                <option value="donation">Doação</option>
-                <option value="partnership">Parceria</option>
-                <option value="volunteer">Voluntariado</option>
-                <option value="other">Outro</option>
-            </select>
-        </div>
-        
-        <div>
-            <label for="message" class="block text-gray-300 mb-2">Mensagem</label>
-            <textarea id="message" name="message" rows="4"
-                      class="w-full bg-white/5 border border-white/20 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-secondary transition-colors duration-300"></textarea>
-        </div>
-        
-        <!-- Campos hidden para Formspree -->
-        <input type="hidden" name="_subject" value="Novo contato - Site ANDS">
-        <input type="hidden" name="_replyto" id="replyTo">
-        
-        <button type="submit" id="submitBtn"
-                class="w-full btn-secondary">
-            <span id="submitText">Enviar Mensagem</span>
-            <span id="loadingSpinner" class="hidden">
-                <i data-lucide="loader-2" class="w-4 h-4 md:w-5 md:h-5 animate-spin ml-2"></i>
-            </span>
-        </button>
-    </form>
-</div>
     </section>
     
-    <!-- Footer -->
     <footer class="bg-dark border-t border-white/10 py-8 md:py-12">
         <div class="max-w-7xl mx-auto px-4 xs:px-6 sm:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <div class="md:col-span-2">
-                    <div class="flex items-center space-x-2 mb-4">
-                        <div class="w-8 h-8 md:w-10 md:h-10 bg-primary rounded-full flex items-center justify-center">
-                            <i data-lucide="heart-handshake" class="w-5 h-5 text-white"></i>
-                        </div>
-                        <h2 class="font-poppins text-xl md:text-2xl font-bold text-white">ANDS</h2>
-                    </div>
-                    <p class="text-gray-400 text-sm md:text-base max-w-md">
-                        Associação Nacional de Desenvolvimento Sustentável - Transformando vidas e 
-                        criando oportunidades por meio do esporte, inclusão social e educação.
-                    </p>
-                </div>
-                
-                <div>
-                    <h3 class="font-poppins text-lg font-semibold text-white mb-4">Projetos</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#projects" class="text-gray-400 hover:text-secondary transition-colors">Squash Brasil</a></li>
-                        <li><a href="#projects" class="text-gray-400 hover:text-secondary transition-colors">Beach Tennis</a></li>
-                        <li><a href="#projects" class="text-gray-400 hover:text-secondary transition-colors">Pickleball</a></li>
-                        <li><a href="#projects" class="text-gray-400 hover:text-secondary transition-colors">ANDS</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h3 class="font-poppins text-lg font-semibold text-white mb-4">Links Rápidos</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#home" class="text-gray-400 hover:text-secondary transition-colors">Home</a></li>
-                        <li><a href="#about" class="text-gray-400 hover:text-secondary transition-colors">Sobre Nós</a></li>
-                        <li><a href="#impact" class="text-gray-400 hover:text-secondary transition-colors">Impacto</a></li>
-                        <li><a href="#contact" class="text-gray-400 hover:text-secondary transition-colors">Contato</a></li>
-                    </ul>
-                </div>
-            </div>
-            
             <div class="border-t border-white/10 mt-8 md:mt-12 pt-6 md:pt-8 text-center">
                 <p class="text-gray-400 text-sm md:text-base">
-                    &copy; 2026 ANDS - Associação Nacional de Desenvolvimento Sustentável. Todos os direitos reservados.
-                </p>
-                <p class="text-gray-500 text-xs mt-2">
-                    CNPJ: 02.892.090/0001-06 <!--  | Inscrição Municipal: X.XXX.XXX-X -->
-                   
+                    &copy; 2026 ANDS - Associação Nacional de Desenvolvimento Sustentável.
                 </p>
             </div>
         </div>
     </footer>
-    
-    <!-- Floating Donate Button -->
-    <a href="#contact" 
-       class="fixed bottom-4 right-4 md:bottom-6 md:right-6 bg-secondary text-white w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center shadow-xl hover:bg-primary transition-all duration-300 z-40 animate-float"
-       aria-label="Doar para IBRASILPP">
-        <i data-lucide="heart" class="w-6 h-6 md:w-7 md:h-7"></i>
-    </a>
     
     <script src="js/main.js" defer></script>
 </body>
