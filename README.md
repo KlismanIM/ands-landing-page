@@ -28,20 +28,19 @@ Carrossel com autoplay e efeito fade
 Formulário funcional com integração externa
 Componentização visual com Tailwind
 Ícones dinâmicos com renderização automática
-⚙️ Estrutura do Projeto
+## ⚙️ Estrutura do Projeto
+
+```
 /project-root
-│── index.html
-│
+├── index.html
 ├── css/
 │   └── style.css
-│
 ├── js/
 │   └── main.js
-│
 ├── img/
 │   └── (assets e placeholders)
-│
 └── .gitignore
+```
 🛠️ Responsabilidades no Projeto
 Arquitetura e organização do frontend
 Implementação de responsividade (mobile → desktop)
