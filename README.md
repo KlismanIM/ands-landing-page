@@ -1,26 +1,33 @@
 🌐 ANDS - Associação Nacional de Desenvolvimento Sustentável
 📌 Sobre o Projeto
 
-Este projeto consiste no desenvolvimento de um site institucional responsivo para a ANDS (Associação Nacional de Desenvolvimento Sustentável), com foco em apresentação institucional, divulgação de projetos sociais e captação de novos participantes e parceiros.
+Desenvolvimento de um site institucional responsivo para a ANDS (Associação Nacional de Desenvolvimento Sustentável), com foco em posicionamento institucional, divulgação de projetos sociais e captação de parceiros e participantes.
 
-A aplicação foi construída com abordagem moderna de frontend, priorizando performance, experiência do usuário e organização de código.
+A aplicação foi construída com abordagem moderna de frontend, priorizando performance, escalabilidade e experiência do usuário (UX).
 
+🎯 Objetivo Estratégico
+Fortalecer a presença digital da instituição
+Apresentar projetos sociais de forma clara e atrativa
+Facilitar a geração de leads (parcerias e voluntários)
+Evidenciar impacto social através de dados e storytelling
 🚀 Tecnologias Utilizadas
 HTML5
-CSS3 (Tailwind CSS)
+Tailwind CSS
 JavaScript (ES6+)
 Alpine.js (reatividade leve)
 Swiper.js (carrossel interativo)
-AOS - Animate On Scroll (animações)
-Lucide Icons (ícones)
+AOS – Animate On Scroll
+Lucide Icons
+Formspree (integração de formulário)
 🧠 Principais Funcionalidades
 Layout responsivo (mobile-first)
 Menu dinâmico com controle de estado
-Animações baseadas em scroll
-Carrossel automático de conteúdo
-Navegação com destaque de seção ativa
-Formulário de contato com tratamento de evento
-Integração de mídias (imagens e vídeos)
+Navegação com seção ativa (scroll tracking)
+Animações baseadas em scroll (AOS)
+Carrossel com autoplay e efeito fade
+Formulário funcional com integração externa
+Componentização visual com Tailwind
+Ícones dinâmicos com renderização automática
 ⚙️ Estrutura do Projeto
 /project-root
 │── index.html
@@ -32,31 +39,38 @@ Integração de mídias (imagens e vídeos)
 │   └── main.js
 │
 ├── img/
-│   └── (imagens do projeto)
+│   └── (assets e placeholders)
+│
+└── .gitignore
 🛠️ Responsabilidades no Projeto
-Organização e estruturação do código
-Separação de responsabilidades (HTML, CSS, JS)
-Customização de layout e responsividade
-Integração e configuração de bibliotecas externas
-Implementação de interatividade (menu, scroll, animações)
-Ajustes visuais e refinamento de UI/UX
-Adequação aos requisitos da instituição
+Arquitetura e organização do frontend
+Implementação de responsividade (mobile → desktop)
+Integração de bibliotecas externas
+Desenvolvimento de interações (menu, scroll, animações)
+Estruturação semântica do HTML
+Padronização visual com Tailwind CSS
+Otimização da experiência do usuário (UX/UI)
+🌐 Acesso ao Projeto
+🔗 Deploy: https://andsbrasil.netlify.app/
+💼 LinkedIn: https://www.linkedin.com/in/klisnmanfernandes-29721a378
 🤖 Observação sobre o Desenvolvimento
 
-O projeto contou com apoio inicial de ferramentas de Inteligência Artificial para aceleração do desenvolvimento, sendo posteriormente refinado, estruturado e ajustado manualmente para atender aos critérios técnicos e visuais exigidos.
+O projeto contou com apoio inicial de ferramentas de Inteligência Artificial para aceleração do desenvolvimento, seguido de refinamento técnico manual, garantindo qualidade de código, consistência visual e aderência às boas práticas.
 
-📈 Melhorias futuras
-Integração com backend para envio real de formulário
-Melhor organização e modularização do JavaScript
-Otimização de performance (build do Tailwind)
-Implementação de boas práticas de acessibilidade (A11Y)
-Possível migração para framework (React ou Vue)
-📬 Contato
-
-
-
-LinkedIn: www.linkedin.com/in/klisnmanfernandes-29721a378
+📈 Roadmap de Evolução
+Integração com backend (API própria)
+Modularização avançada do JavaScript
+Build otimizado com Tailwind CLI
+Migração para framework moderno (React / Vue)
+Implementação de acessibilidade (A11Y)
+SEO técnico e performance (Lighthouse)
 📊 Status do Projeto
 
-✅ Concluído (versão funcional)
-🔄 Em evolução contínua
+✅ Versão funcional publicada
+🚀 Em evolução contínua
+
+📬 Contato
+
+Aberto a oportunidades, parcerias e novos projetos:
+
+LinkedIn: https://www.linkedin.com/in/klisnmanfernandes-29721a378
