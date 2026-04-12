@@ -1,0 +1,9 @@
+imagem/
+!imagem/logo.png
+!imagem/icons-*.svg
+!imagem/placeholder.jpg
+.vscode/
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
