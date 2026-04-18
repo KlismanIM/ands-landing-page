@@ -1,0 +1,22 @@
+/* Helpers Customizados */
+.text-primary { color: #1E3A8A; }
+.text-secondary { color: #059669; }
+.bg-primary { background: #1E3A8A; }
+.bg-secondary { background: #059669; }
+
+.spacing-xs { margin-bottom: 0.5rem; }
+.spacing-sm { margin-bottom: 1rem; }
+.spacing-md { margin-bottom: 2rem; }
+.spacing-lg { margin-bottom: 4rem; }
+
+.hidden { display: none; }
+.text-center { text-align: center; }
+.flex-center { display: flex; align-items: center; justify-content: center; }
+
+/* Animations Utilities */
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
+.animate-fade-in {
+    animation: fadeIn 1s ease-out;
+}
